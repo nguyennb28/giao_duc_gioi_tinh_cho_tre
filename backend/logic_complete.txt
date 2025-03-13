@@ -1,0 +1,10 @@
+Quy trình mở khóa bài học (Business Logic)
+Khi học sinh hoàn thành một bài giảng:
+Client gửi request cập nhật tiến trình học (ví dụ: qua một endpoint như /api/lessons/complete/) chứa thông tin user_id, lesson_id, điểm thi và các dữ liệu cần thiết khác.
+Backend tạo hoặc cập nhật bản ghi trong UserProgress cho bài giảng đó với is_completed=True (và cập nhật end_time).
+Kiểm tra tiến độ của chương học:
+Sau khi cập nhật, backend sẽ lấy tập hợp tất cả bài giảng của chương mà bài vừa hoàn thành thuộc về.
+So sánh số lượng bài đã hoàn thành (theo bảng UserProgress của học sinh) với tổng số bài trong chương đó.
+Mở khóa bài học tiếp theo:
+Nếu học sinh đã hoàn thành đủ các bài của chương hiện tại, hệ thống sẽ cho phép học sinh truy cập bài thứ nhất của chương tiếp theo.
+Thông tin này có thể được trả về qua một endpoint riêng (ví dụ: GET /api/user/allowed-lessons/ hoặc /api/user/progress/), giúp front-end hiển thị trạng thái "mở khóa" hoặc "khóa" cho từng bài giảng dựa trên tiến độ học.
